@@ -24,14 +24,12 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     
-    // Check if product has colors and sizes
-    if (!product.colors || !product.sizes || product.colors.length === 0 || product.sizes.length === 0) {
-      return
-    }
-
     setIsAdding(true)
-    // Add with default first color and size
-    addToCart(product, 1, product.sizes[0], product.colors[0].name)
+    // Add with default first color and size, fallback if missing
+    const defaultSize = product.sizes && product.sizes.length > 0 ? product.sizes[0] : "One Size"
+    const defaultColor = product.colors && product.colors.length > 0 ? product.colors[0].name : "Default"
+    
+    addToCart(product, 1, defaultSize, defaultColor)
     
     // Reset button state after brief delay
     setTimeout(() => setIsAdding(false), 1500)

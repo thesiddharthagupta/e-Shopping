@@ -13,8 +13,8 @@ export default function CartPage() {
     return (
       <div className="container mx-auto px-4 md:px-6 py-16">
         <div className="text-center max-w-md mx-auto">
-          <h1 className="text-4xl font-bold text-[#1a1a1a] mb-4">Your Cart is Empty</h1>
-          <p className="text-[#666666] mb-8">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Your Cart is Empty</h1>
+          <p className="text-muted-foreground mb-8">
             Looks like you haven't added any items to your cart yet. Start shopping to find something amazing!
           </p>
           <Link href="/shop">
@@ -37,26 +37,26 @@ export default function CartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-8">Shopping Cart</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Shopping Cart</h1>
           <div className="space-y-4">
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex gap-4 p-6 bg-white border border-[#d9d6d1] rounded-lg hover:shadow-md transition-shadow"
+                className="flex gap-4 p-6 bg-secondary border border-border rounded-lg hover:shadow-md transition-shadow"
               >
                 {/* Product Image Placeholder */}
-                <div className="w-24 h-24 bg-neutral-200 rounded-lg flex-shrink-0" />
+                <div className="w-24 h-24 bg-muted rounded-lg flex-shrink-0" />
 
                 {/* Product Details */}
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-[#1a1a1a] mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {item.product.name}
                   </h3>
-                  <div className="space-y-1 text-sm text-[#666666] mb-3">
+                  <div className="space-y-1 text-sm text-muted-foreground mb-3">
                     <p>Size: <span className="font-medium">{item.selectedSize}</span></p>
                     <p>Color: <span className="font-medium">{item.selectedColor}</span></p>
                   </div>
-                  <p className="text-lg font-bold text-[#1a1a1a]">
+                  <p className="text-lg font-bold text-foreground">
                     ${(item.product.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
@@ -71,13 +71,13 @@ export default function CartPage() {
                         item.selectedColor
                       )
                     }
-                    className="text-[#999999] hover:text-red-500 transition-colors"
+                    className="text-muted-foreground hover:text-red-500 transition-colors"
                   >
                     <Trash2 className="h-5 w-5" />
                   </button>
 
                   {/* Quantity Selector */}
-                  <div className="flex items-center gap-2 border border-[#d9d6d1] rounded-lg p-1">
+                  <div className="flex items-center gap-2 border border-border rounded-lg p-1">
                     <button
                       onClick={() =>
                         updateQuantity(
@@ -87,11 +87,11 @@ export default function CartPage() {
                           item.selectedColor
                         )
                       }
-                      className="p-1 hover:bg-neutral-100 rounded transition-colors"
+                      className="p-1 hover:bg-muted rounded transition-colors"
                     >
-                      <Minus className="h-4 w-4 text-[#666666]" />
+                      <Minus className="h-4 w-4 text-muted-foreground" />
                     </button>
-                    <span className="w-8 text-center text-[#1a1a1a] font-semibold">
+                    <span className="w-8 text-center text-foreground font-semibold">
                       {item.quantity}
                     </span>
                     <button
@@ -103,9 +103,9 @@ export default function CartPage() {
                           item.selectedColor
                         )
                       }
-                      className="p-1 hover:bg-neutral-100 rounded transition-colors"
+                      className="p-1 hover:bg-muted rounded transition-colors"
                     >
-                      <Plus className="h-4 w-4 text-[#666666]" />
+                      <Plus className="h-4 w-4 text-muted-foreground" />
                     </button>
                   </div>
                 </div>
@@ -123,34 +123,34 @@ export default function CartPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="sticky top-24 bg-white border border-[#d9d6d1] rounded-lg p-6 space-y-6">
-            <h2 className="text-xl font-bold text-[#1a1a1a]">Order Summary</h2>
+          <div className="sticky top-24 bg-secondary border border-border rounded-lg p-6 space-y-6">
+            <h2 className="text-xl font-bold text-foreground">Order Summary</h2>
 
-            <div className="space-y-3 border-b border-[#d9d6d1] pb-6">
-              <div className="flex justify-between text-[#666666]">
+            <div className="space-y-3 border-b border-border pb-6">
+              <div className="flex justify-between text-muted-foreground">
                 <span>Subtotal ({totalItems} items)</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-[#666666]">
+              <div className="flex justify-between text-muted-foreground">
                 <span>Shipping</span>
                 <span>Free</span>
               </div>
-              <div className="flex justify-between text-[#666666]">
+              <div className="flex justify-between text-muted-foreground">
                 <span>Tax</span>
                 <span>${(totalPrice * 0.08).toFixed(2)}</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center text-lg font-bold text-[#1a1a1a]">
+            <div className="flex justify-between items-center text-lg font-bold text-foreground">
               <span>Total</span>
               <span>${(totalPrice * 1.08).toFixed(2)}</span>
             </div>
 
-            <Button className="w-full bg-accent text-white hover:bg-accent/90 h-12 text-base">
+            <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-12 text-base">
               Proceed to Checkout
             </Button>
 
-            <p className="text-xs text-[#999999] text-center">
+            <p className="text-xs text-muted-foreground text-center">
               Free shipping on orders over $100. Standard delivery in 5-7 business days.
             </p>
           </div>

@@ -4,11 +4,25 @@ import * as React from "react"
 import { Product } from "@/lib/mock-data"
 import { Button } from "@/components/ui/Button"
 import { ShoppingCart, Heart, Share2, Star } from "lucide-react"
+import { useCart } from "@/lib/cart-context"
 
 export function ProductInfo({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = React.useState<string | null>(null)
   const [selectedColor, setSelectedColor] = React.useState<string | null>(null)
   const [quantity, setQuantity] = React.useState(1)
+  const { addToCart } = useCart()
+  const [isAdding, setIsAdding] = React.useState(false)
+
+  const handleAddToCart = () => {
+    setIsAdding(true)
+    const size = selectedSize || (product.sizes?.[0] ?? "One Size")
+    const color = selectedColor || (product.colors?.[0]?.name ?? "Default")
+    
+    // @ts-ignore - Product type mismatch between mock-data and products
+    addToCart(product, quantity, size, color)
+    
+    setTimeout(() => setIsAdding(false), 1500)
+  }
 
   return (
     <div className="flex flex-col">
@@ -88,8 +102,8 @@ export function ProductInfo({ product }: { product: Product }) {
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         {/* Quantity selector could go here */}
-        <Button size="lg" className="flex-1 h-14 text-lg">
-          <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
+        <Button size="lg" className="flex-1 h-14 text-lg" onClick={handleAddToCart} disabled={isAdding}>
+          <ShoppingCart className="mr-2 h-5 w-5" /> {isAdding ? "Added!" : "Add to Cart"}
         </Button>
         <Button size="icon" variant="outline" className="h-14 w-14 shrink-0">
           <Heart className="h-6 w-6" />
