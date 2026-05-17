@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #111827;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f3f4f6;
+  --color-secondary-foreground: #111827;
+  --color-accent: #f97316;
+  --color-accent-foreground: #ffffff;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-border: #e5e7eb;
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #030712;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030712;
+    --foreground: #f9fafb;
+  }
+  @theme {
+    --color-primary: #f9fafb;
+    --color-primary-foreground: #030712;
+    --color-secondary: #1f2937;
+    --color-secondary-foreground: #f9fafb;
+    --color-accent: #ea580c;
+    --color-accent-foreground: #ffffff;
+    
+    --color-muted: #1f2937;
+    --color-muted-foreground: #9ca3af;
+    --color-border: #374151;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  @apply antialiased;
+}
+
+/* Base custom utilities */
+.glass-effect {
+  @apply bg-white/70 backdrop-blur-md dark:bg-black/50 dark:backdrop-blur-md border border-white/20 dark:border-white/10;
+}
