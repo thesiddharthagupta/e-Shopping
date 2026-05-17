@@ -9,6 +9,7 @@ const inter = Inter({
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { CartProvider } from "@/lib/cart-context";
 
 export const metadata: Metadata = {
   title: "Luxe | Modern Clothing E-Commerce",
@@ -21,13 +22,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} h-full light`} style={{ colorScheme: "light" }}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-grow pt-[72px]">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-grow content-bg pt-[var(--navbar-height)]">
+            {children}
+          </main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

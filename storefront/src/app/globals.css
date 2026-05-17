@@ -1,42 +1,66 @@
 @import "tailwindcss";
 
+/* Premium Minimal theme (Off-white + Charcoal + Emerald) */
 @theme {
-  --color-primary: #111827;
+  --color-primary: #1a1a1a; /* deep charcoal */
   --color-primary-foreground: #ffffff;
-  --color-secondary: #f3f4f6;
-  --color-secondary-foreground: #111827;
-  --color-accent: #f97316;
+  --color-secondary: #f5f5f0;
+  --color-secondary-foreground: #1a1a1a;
+  --color-accent: #059669; /* emerald */
   --color-accent-foreground: #ffffff;
   
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-muted: #f3f4f6;
-  --color-muted-foreground: #6b7280;
-  --color-border: #e5e7eb;
+  --color-muted: #e8e7e3;
+  --color-muted-foreground: #666666;
+  --color-border: #d9d6d1;
   --font-sans: var(--font-inter);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #030712;
+  --background: #fafaf8;
+  --foreground: #1a1a1a;
+  --content-background: #fafaf8;
+  --navbar-height: 72px;
+  color-scheme: light;
+}
+
+/* Explicitly set light mode colors */
+html.light :root {
+  --background: #fafaf8;
+  --foreground: #1a1a1a;
+  --content-background: #fafaf8;
+}
+
+html.light {
+  background-color: #fafaf8;
+  color: #1a1a1a;
+}
+
+/* Responsive navbar height */
+@media (max-width: 640px) {
+  :root {
+    --navbar-height: 64px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #030712;
-    --foreground: #f9fafb;
+    --background: #1a1a1a; /* deep charcoal */
+    --foreground: #f5f5f0; /* off-white */
+    --content-background: #1a1a1a;
   }
   @theme {
-    --color-primary: #f9fafb;
-    --color-primary-foreground: #030712;
-    --color-secondary: #1f2937;
-    --color-secondary-foreground: #f9fafb;
-    --color-accent: #ea580c;
-    --color-accent-foreground: #ffffff;
+    --color-primary: #f5f5f0;
+    --color-primary-foreground: #1a1a1a;
+    --color-secondary: #2a2a28;
+    --color-secondary-foreground: #f5f5f0;
+    --color-accent: #10b981; /* brighter emerald for dark mode */
+    --color-accent-foreground: #1a1a1a;
     
-    --color-muted: #1f2937;
-    --color-muted-foreground: #9ca3af;
-    --color-border: #374151;
+    --color-muted: #3a3a38;
+    --color-muted-foreground: #999996;
+    --color-border: #4a4a48;
   }
 }
 
@@ -49,5 +73,58 @@ body {
 
 /* Base custom utilities */
 .glass-effect {
-  @apply bg-white/70 backdrop-blur-md dark:bg-black/50 dark:backdrop-blur-md border border-white/20 dark:border-white/10;
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--color-border);
+}
+
+/* Helper class for content background between header and footer */
+.content-bg {
+  background-color: var(--content-background);
+}
+
+/* Premium header band styling */
+.page-header-band {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e7e3;
+  color: #1a1a1a;
+}
+
+.page-header-band .text-muted-foreground {
+  color: #666666;
+}
+
+.page-content-band {
+  background-color: #fafaf8;
+}
+
+/* Ensure light mode overrides */
+html.light .page-header-band {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e8e7e3 !important;
+  color: #1a1a1a !important;
+}
+
+html.light .page-header-band .text-muted-foreground {
+  color: #666666 !important;
+}
+
+html.light .page-content-band {
+  background-color: #fafaf8 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-header-band {
+    background-color: #2a2a28;
+    border-bottom: 1px solid #3a3a38;
+    color: #f5f5f0;
+  }
+
+  .page-header-band .text-muted-foreground {
+    color: #999996;
+  }
+
+  .page-content-band {
+    background-color: #1a1a1a;
+  }
 }
