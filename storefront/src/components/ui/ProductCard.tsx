@@ -41,12 +41,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <CardContent className="p-0">
           {/* Image Container */}
           <div className="relative overflow-hidden h-64 bg-secondary">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
-              loading="lazy"
-            />
+            <div className="w-full h-full bg-neutral-200 group-hover:scale-110 transition-transform duration-300" />
             
             {/* Badge */}
             <div className="absolute top-4 left-4 z-10 flex gap-2">

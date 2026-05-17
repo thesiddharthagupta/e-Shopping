@@ -23,11 +23,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               activeImage === idx ? "ring-2 ring-primary ring-offset-2" : "opacity-70 hover:opacity-100"
             }`}
           >
-            <img
-              src={src}
-              alt={`${productName} view ${idx + 1}`}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {/* Real image goes here */}
+            <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
+              Img {idx + 1}
+            </div>
           </button>
         ))}
       </div>
@@ -39,13 +38,9 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0"
+          className="absolute inset-0 flex items-center justify-center text-muted-foreground/30"
         >
-          <img
-            src={images[activeImage]}
-            alt={productName}
-            className="w-full h-full object-cover"
-          />
+           <span className="text-xl uppercase tracking-widest">{productName} Image</span>
         </motion.div>
       </div>
     </div>
