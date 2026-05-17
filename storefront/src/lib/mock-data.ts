@@ -21,7 +21,8 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 35.00,
     category: "Men",
     images: [
-      "/placeholder-1.webp",
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&auto=format&fit=crop&q=80"
     ],
     sizes: ["S", "M", "L", "XL"],
     colors: [
@@ -41,7 +42,8 @@ export const MOCK_PRODUCTS: Product[] = [
     originalPrice: 110.00,
     category: "Women",
     images: [
-      "/placeholder-2.webp",
+      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=600&auto=format&fit=crop&q=80"
     ],
     sizes: ["XS", "S", "M", "L"],
     colors: [
@@ -58,7 +60,8 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 120.00,
     category: "Unisex",
     images: [
-      "/placeholder-3.webp",
+      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=600&auto=format&fit=crop&q=80"
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: [
@@ -75,7 +78,8 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 150.00,
     category: "Women",
     images: [
-      "/placeholder-4.webp",
+      "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&auto=format&fit=crop&q=80"
     ],
     sizes: ["XS", "S", "M", "L"],
     colors: [
@@ -93,7 +97,8 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 75.00,
     category: "Men",
     images: [
-      "/placeholder-5.webp",
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&auto=format&fit=crop&q=80"
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     colors: [

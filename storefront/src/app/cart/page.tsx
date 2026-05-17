@@ -11,41 +11,67 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="container mx-auto px-4 md:px-6 py-16">
-        <div className="text-center max-w-md mx-auto">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Your Cart is Empty</h1>
-          <p className="text-muted-foreground mb-8">
-            Looks like you haven't added any items to your cart yet. Start shopping to find something amazing!
-          </p>
-          <Link href="/shop">
-            <Button className="bg-accent text-white hover:bg-accent/90">
-              Continue Shopping
-            </Button>
-          </Link>
-        </div>
+      <div className="min-h-screen bg-background">
+        <section className="page-content-band min-h-[60vh] flex items-center">
+          <div className="container mx-auto px-4 md:px-6 py-16">
+            <div className="text-center max-w-md mx-auto">
+              <h1 className="text-4xl font-bold text-foreground mb-4">Your Cart is Empty</h1>
+              <p className="text-muted-foreground mb-8">
+                Looks like you haven't added any items to your cart yet. Start shopping to find something amazing!
+              </p>
+              <Link href="/shop">
+                <Button className="bg-accent text-white hover:bg-accent/90">
+                  Continue Shopping
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     )
   }
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-8">
-      <Link href="/shop" className="flex items-center gap-2 text-accent hover:text-accent/80 mb-8">
-        <ArrowLeft className="h-4 w-4" />
-        Continue Shopping
-      </Link>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <section className="border-b border-border sticky top-0 z-40 page-header-band">
+        <div className="container mx-auto px-4 md:px-6 py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tighter">Shopping Cart</h1>
+              <p className="text-muted-foreground mt-1">
+                You have {totalItems} items in your cart
+              </p>
+            </div>
+            
+            <Link href="/shop" className="flex items-center gap-2 text-accent hover:text-accent/80 font-medium">
+              <ArrowLeft className="h-4 w-4" />
+              Continue Shopping
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items */}
-        <div className="lg:col-span-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Shopping Cart</h1>
-          <div className="space-y-4">
+      {/* Main Content */}
+      <section className="page-content-band">
+        <div className="container mx-auto px-4 md:px-6 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Cart Items */}
+            <div className="lg:col-span-2">
+              <div className="space-y-4">
             {items.map((item) => (
               <div
                 key={item.id}
                 className="flex gap-4 p-6 bg-secondary border border-border rounded-lg hover:shadow-md transition-shadow"
               >
-                {/* Product Image Placeholder */}
-                <div className="w-24 h-24 bg-muted rounded-lg flex-shrink-0" />
+                {/* Product Image */}
+                <div className="w-24 h-24 bg-muted rounded-lg flex-shrink-0 overflow-hidden relative">
+                  <img
+                    src={item.product.image}
+                    alt={item.product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
                 {/* Product Details */}
                 <div className="flex-1">
@@ -157,5 +183,7 @@ export default function CartPage() {
         </div>
       </div>
     </div>
+  </section>
+</div>
   )
 }
