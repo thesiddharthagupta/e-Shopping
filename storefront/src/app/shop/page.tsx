@@ -45,10 +45,7 @@ export default function ShopPage() {
         <div className="container mx-auto px-4 md:px-6 py-3">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-[#1a1a1a]">Shop</h1>
-              <p className="text-[#666666] mt-1">
-                Showing {filteredProducts.length} of {products.length} products
-              </p>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-foreground">Shop</h1>
             </div>
 
             {/* Sort and Filter */}
@@ -56,7 +53,7 @@ export default function ShopPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-4 py-2 rounded-lg border border-border bg-white text-[#1a1a1a] text-sm font-medium hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                className="px-4 py-2 rounded-lg border border-border bg-secondary text-foreground text-sm font-medium hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <option value="newest">Newest</option>
                 <option value="price-low">Price: Low to High</option>
@@ -84,11 +81,11 @@ export default function ShopPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Sidebar Filters */}
           <aside
-            className={`md:col-span-1 ${showFilters ? "block" : "hidden"} md:block space-y-6 bg-white p-6 rounded-lg border border-[#d9d6d1] h-fit`}
+            className={`md:col-span-1 ${showFilters ? "block" : "hidden"} md:block space-y-6 bg-secondary p-6 rounded-lg border border-border h-fit`}
           >
             {/* Category Filter */}
-            <div className="pb-4 border-b border-[#d9d6d1]">
-              <h3 className="font-semibold mb-4 text-[#1a1a1a]">Categories</h3>
+            <div className="pb-4 border-b border-border">
+              <h3 className="font-semibold mb-4 text-foreground">Categories</h3>
               <div className="space-y-2">
                 {categories.map((cat) => (
                   <button
@@ -97,7 +94,7 @@ export default function ShopPage() {
                     className={`w-full text-sm px-3 py-2 rounded-lg font-medium transition-all duration-200 ${
                       selectedCategory === cat.value
                         ? "bg-accent text-white shadow-md"
-                        : "bg-white text-[#1a1a1a] border border-[#d9d6d1] hover:border-accent hover:bg-neutral-50"
+                        : "bg-secondary text-foreground border border-border hover:border-accent hover:bg-muted"
                     }`}
                   >
                     {cat.label}
@@ -107,8 +104,8 @@ export default function ShopPage() {
             </div>
 
             {/* Search in Sidebar */}
-            <div className="pb-4 border-b border-[#d9d6d1]">
-              <h3 className="font-semibold mb-3 text-[#1a1a1a]">Search</h3>
+            <div className="pb-4 border-b border-border">
+              <h3 className="font-semibold mb-3 text-foreground">Search</h3>
               <Input
                 placeholder="Search products..."
                 value={searchQuery}
@@ -119,8 +116,8 @@ export default function ShopPage() {
 
             {/* Price Range (Placeholder) */}
             <div>
-              <h3 className="font-semibold mb-4 text-[#1a1a1a]">Price Range</h3>
-              <div className="text-sm text-[#666666] px-3 py-2 bg-neutral-50 rounded-lg border border-[#d9d6d1]">
+              <h3 className="font-semibold mb-4 text-foreground">Price Range</h3>
+              <div className="text-sm text-muted-foreground px-3 py-2 bg-muted rounded-lg border border-border">
                 $0 - $500+
               </div>
             </div>

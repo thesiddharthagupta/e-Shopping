@@ -84,12 +84,12 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           {/* Product Info */}
-          <div className="p-4 bg-white">
-            <h3 className="font-semibold text-sm mb-1 line-clamp-2 text-[#1a1a1a] group-hover:text-accent transition-colors">
+          <div className="p-4 bg-secondary">
+            <h3 className="font-semibold text-sm mb-1 line-clamp-2 text-foreground group-hover:text-accent transition-colors">
               {product.name}
             </h3>
             
-            <p className="text-xs text-[#999999] mb-3 capitalize">
+            <p className="text-xs text-muted-foreground mb-3 capitalize">
               {product.category}
             </p>
 
@@ -105,14 +105,14 @@ export function ProductCard({ product }: ProductCardProps) {
                   </span>
                 ))}
               </div>
-              <span className="text-xs text-[#999999]">({product.reviews})</span>
+              <span className="text-xs text-muted-foreground">({product.reviews})</span>
             </div>
 
             {/* Price */}
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg font-bold text-[#1a1a1a]">${product.price}</span>
+              <span className="text-lg font-bold text-foreground">${product.price}</span>
               {product.originalPrice && (
-                <span className="text-sm text-[#999999] line-through">
+                <span className="text-sm text-muted-foreground line-through">
                   ${product.originalPrice}
                 </span>
               )}

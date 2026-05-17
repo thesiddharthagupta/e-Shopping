@@ -64,8 +64,8 @@ export function Navbar() {
     <>
       <header
         style={{ height: 'var(--navbar-height)' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu ${isNavVisible ? "translate-y-0" : "-translate-y-full"} ${
-          isScrolled ? "glass-effect shadow-sm" : "glass-effect"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform-gpu bg-[#1a1a1a] text-white border-b border-white/10 ${isNavVisible ? "translate-y-0" : "-translate-y-full"} ${
+          isScrolled ? "shadow-md bg-[#1a1a1a]/95 backdrop-blur-md" : ""
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 h-full flex items-center justify-between">
@@ -76,46 +76,47 @@ export function Navbar() {
               size="icon"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open Menu"
+              className="text-white hover:text-accent hover:bg-white/10"
             >
               <Menu className="h-6 w-6" />
             </Button>
           </div>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 text-white">
             <span className="text-2xl font-bold tracking-tighter">Luxe.</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 font-medium">
-            <Link href="/" className="hover:text-accent transition-colors">
+            <Link href="/" className="text-white/80 hover:text-accent transition-colors">
               Home
             </Link>
-            <Link href="/shop" className="hover:text-accent transition-colors">
+            <Link href="/shop" className="text-white/80 hover:text-accent transition-colors">
               Shop All
             </Link>
-            <Link href="/categories/women" className="hover:text-accent transition-colors">
+            <Link href="/categories/women" className="text-white/80 hover:text-accent transition-colors">
               Women
             </Link>
-            <Link href="/categories/men" className="hover:text-accent transition-colors">
+            <Link href="/categories/men" className="text-white/80 hover:text-accent transition-colors">
               Men
             </Link>
-            <Link href="/collections/new" className="hover:text-accent transition-colors">
+            <Link href="/collections/new" className="text-white/80 hover:text-accent transition-colors">
               New Arrivals
             </Link>
           </nav>
 
           {/* Icons (Search, User, Cart) */}
-          <div className="flex items-center gap-2 md:gap-4">
-            <div className="hidden md:flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 backdrop-blur-sm border border-white/20">
-              <Search className="h-4 w-4 text-muted-foreground" />
+          <div className="flex items-center gap-2 md:gap-4 text-white">
+            <div className="hidden md:flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 border border-white/15">
+              <Search className="h-4 w-4 text-white/50" />
               <input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch(e as any)}
-                className="bg-transparent outline-none text-sm w-48 placeholder:text-muted-foreground"
+                className="bg-transparent outline-none text-sm w-48 placeholder:text-white/40 text-white"
               />
             </div>
             <Button 
@@ -123,15 +124,15 @@ export function Navbar() {
               size="icon" 
               aria-label="Search"
               onClick={() => setIsSearchOpen(true)}
-              className="md:hidden"
+              className="md:hidden text-white hover:text-accent hover:bg-white/10"
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hidden sm:inline-flex" aria-label="Account">
+            <Button variant="ghost" size="icon" className="hidden sm:inline-flex text-white hover:text-accent hover:bg-white/10" aria-label="Account">
               <User className="h-5 w-5" />
             </Button>
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative" aria-label="Cart">
+              <Button variant="ghost" size="icon" className="relative text-white hover:text-accent hover:bg-white/10" aria-label="Cart">
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
                   <span className="absolute top-1 right-1 h-5 w-5 rounded-full bg-accent text-white text-xs flex items-center justify-center font-semibold">

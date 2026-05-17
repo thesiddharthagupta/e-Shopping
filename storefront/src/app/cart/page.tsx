@@ -172,9 +172,11 @@ export default function CartPage() {
               <span>${(totalPrice * 1.08).toFixed(2)}</span>
             </div>
 
-            <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-12 text-base">
-              Proceed to Checkout
-            </Button>
+            <Link href="/checkout">
+              <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-12 text-base">
+                Proceed to Checkout
+              </Button>
+            </Link>
 
             <p className="text-xs text-muted-foreground text-center">
               Free shipping on orders over $100. Standard delivery in 5-7 business days.
