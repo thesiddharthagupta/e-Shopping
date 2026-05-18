@@ -1,0 +1,86 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  password  String   // Hashed password
+  role      String   @default("USER") // "USER" | "ADMIN"
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id            String      @id @default(uuid())
+  name          String
+  description   String
+  price         Float
+  originalPrice Float?
+  categoryId    String
+  category      Category    @relation(fields: [categoryId], references: [id])
+  images        String      // Store as serialized JSON array string since SQLite doesn't support scalar list of strings
+  sizes         String      // Store as serialized JSON array string
+  colors        String      // Store as serialized JSON array string of {name, hex} objects
+  rating        Float       @default(5.0)
+  reviewCount   Int         @default(0)
+  inStock       Boolean     @default(true)
+  isNew         Boolean     @default(false)
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  orderNumber     String      @unique
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  customerName    String
+  customerEmail   String
+  shippingAddress String
+  city            String
+  postalCode      String
+  phone           String
+  subtotal        Float
+  tax             Float
+  shipping        Float
+  total           Float
+  orderStatus     String      @default("PENDING") // "PENDING" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED"
+  paymentStatus   String      @default("PENDING") // "PENDING" | "PAID" | "FAILED"
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  productName String
+  quantity    Int
+  price       Float
+  size        String
+  color       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -8,6 +8,7 @@ import { ArrowLeft, CreditCard, Truck, Lock, ShieldCheck, Check } from "lucide-r
 import { useCart } from "@/lib/cart-context"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
+import { createOrderAction } from "./actions"
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -152,12 +153,53 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true)
     
-    // Simulate premium payment processing
-    setTimeout(() => {
-      const orderId = `ORD-2026-${Math.floor(100000 + Math.random() * 900000)}`
-      clearCart()
-      router.push(`/checkout/success?email=${encodeURIComponent(shipping.email)}&orderId=${orderId}&total=${finalTotal.toFixed(2)}&name=${encodeURIComponent(shipping.name)}`)
-    }, 2000)
+    // Map cart items into DB order items format
+    const orderItems = items.map((item) => ({
+      productId: item.product.id,
+      productName: item.product.name,
+      quantity: item.quantity,
+      price: item.product.price,
+      size: item.selectedSize,
+      color: item.selectedColor,
+    }))
+
+    try {
+      // Call the Server Action
+      const response = await createOrderAction({
+        customerName: shipping.name,
+        customerEmail: shipping.email,
+        shippingAddress: shipping.address,
+        city: shipping.city,
+        postalCode: shipping.zipCode,
+        phone: shipping.phone,
+        subtotal: totalPrice,
+        tax: tax,
+        shipping: 0,
+        total: finalTotal,
+        items: orderItems,
+      })
+
+      if (response.success && response.orderNumber) {
+        clearCart()
+        router.push(
+          `/checkout/success?email=${encodeURIComponent(shipping.email)}&orderId=${
+            response.orderNumber
+          }&total=${finalTotal.toFixed(2)}&name=${encodeURIComponent(shipping.name)}`
+        )
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          payment: response.error || "Failed to process database order. Please try again.",
+        }))
+        setIsSubmitting(false)
+      }
+    } catch (err) {
+      setErrors((prev) => ({
+        ...prev,
+        payment: "An unexpected error occurred during database checkout. Please try again.",
+      }))
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -420,6 +462,7 @@ export default function CheckoutPage() {
                       </>
                     )}
                   </Button>
+                  {errors.payment && <p className="text-sm font-semibold text-red-500 mt-3 text-center">{errors.payment}</p>}
                 </form>
               )}
 

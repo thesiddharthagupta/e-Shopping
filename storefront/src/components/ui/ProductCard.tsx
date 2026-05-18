@@ -36,13 +36,18 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/product/${product.id}`}>
       <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
         <CardContent className="p-0">
           {/* Image Container */}
           <div className="relative overflow-hidden h-64 bg-secondary">
-            <div className="w-full h-full bg-neutral-200 group-hover:scale-110 transition-transform duration-300" />
-            
+            {/* Show first image if available, else fallback */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={product.images && product.images.length > 0 ? product.images[0] : "/placeholder-1.webp"}
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            />
             {/* Badge */}
             <div className="absolute top-4 left-4 z-10 flex gap-2">
               {product.isNew && (
@@ -56,7 +61,6 @@ export function ProductCard({ product }: ProductCardProps) {
                 </span>
               )}
             </div>
-
             {/* Favorite Button */}
             <button
               onClick={(e) => {
@@ -65,11 +69,8 @@ export function ProductCard({ product }: ProductCardProps) {
               }}
               className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white transition-colors"
             >
-              <Heart
-                className={`h-5 w-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-neutral-400"}`}
-              />
+              <Heart className={`h-5 w-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-neutral-400"}`} />
             </button>
-
             {/* Stock Status */}
             {!product.inStock && (
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
